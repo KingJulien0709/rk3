@@ -6,15 +6,15 @@ public class UDP_Client {
     private static final int PORT = 2345;
     private static final String HOST = "localhost";
 
-    private static void createUDPClient(){
+    private static void createUDPClient(int port, String host){
         try{
             DatagramSocket socket = new DatagramSocket();
-            InetAddress address = InetAddress.getByName(HOST);
+            InetAddress address = InetAddress.getByName(host);
             for(int i = 0; i < 1000001; i++) {
                 byte[] buf = ByteBuffer.allocate(4).putInt(i).array();
-                DatagramPacket packet = new DatagramPacket(buf, buf.length,address, PORT);
+                DatagramPacket packet = new DatagramPacket(buf, buf.length,address, port);
                 socket.send(packet);
-                Thread.sleep(0);
+                Thread.sleep(10);
             }
             socket.close();
         } catch (SocketException e) {
@@ -26,6 +26,6 @@ public class UDP_Client {
         }
     }
     public static void main(String[] args) {
-        createUDPClient();
+        createUDPClient(PORT, HOST);
     }
 }

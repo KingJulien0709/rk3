@@ -8,9 +8,9 @@ public class UDP_Server {
 
     private static final byte[] buf = new byte[256];
 
-    private static void createUDPServer(){
+    private static void createUDPServer(int port){
         try{
-            DatagramSocket serverSocket = new DatagramSocket(PORT);
+            DatagramSocket serverSocket = new DatagramSocket(port);
             System.out.println("Server started");
             int last_msg_int = -1;
             while (true) {
@@ -19,7 +19,7 @@ public class UDP_Server {
                 int msg_load_int = ByteBuffer.wrap(packet.getData()).getInt();
                 if(last_msg_int+1 != msg_load_int) {
                     System.out.println("Error");
-
+                    msg_load_int++;
                 } else {
                     System.out.println(msg_load_int);
                 }
@@ -33,6 +33,6 @@ public class UDP_Server {
     }
 
     public static void main(String[] args) {
-        createUDPServer();
+        createUDPServer(PORT);
     }
 }

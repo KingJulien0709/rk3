@@ -6,9 +6,9 @@ public class TCP_Client {
     private static final int PORT = 2345;
     private static final String HOST = "localhost";
 
-    private void createClient(){
+    private void createClient(int port, String host){
         try{
-            Socket socket = new Socket(HOST, PORT);
+            Socket socket = new Socket(host, port);
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             for(int i = 0; i < 1000001; i++) {
                 out.writeInt(i);
@@ -25,6 +25,6 @@ public class TCP_Client {
     }
     public static void main(String[] args) {
         TCP_Client client = new TCP_Client();
-        client.createClient();
+        client.createClient(PORT, HOST);
     }
 }
